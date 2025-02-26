@@ -4,7 +4,7 @@ from main_menu import MainMenu
 from person import Person
 from student import Student
 from employee import Employee
-from utils import *
+from utils import getNumberInRange
 
 def createAndSaveEntry(target_database: dict[int, Person], target_list: list[int]) -> int:
     try:
@@ -140,11 +140,6 @@ def writeToFile(user_database: dict[int, Person], current_path: str) -> bool:
 
         df = pd.DataFrame(data)
         
-        numeric_columns: list[str] = ["id", "age", "year_of_study", "avg_score", "salary"]
-        for column in numeric_columns:
-            if column in df.columns:
-                df[column] = pd.to_numeric(df[column], errors='coerce').fillna(0).astype(int)
-
         output_path: str = os.path.join(current_path, file_name)
         
         directory: str = os.path.dirname(output_path)
